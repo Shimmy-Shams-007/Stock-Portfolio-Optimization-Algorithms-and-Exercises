@@ -1,38 +1,32 @@
-# This is just a practise document for basic python execution
+# This document does not hold any main programs
+# This is just a practise document for basic python exercises
+
 
 import time
 import numpy as np
 
 from math import exp
 
+class CouponBonds:
+    def __init__(self, principal, maturity, rate, interest):
+        self.principal = principal
+        self.maturity = maturity
+        self.rate = rate / 100
+        self.interest = interest / 100
 
-def future_discrete_value(x, r, n):
-    return x * (1 + r) ** n
+    def present_value(self, x, n):
+        return x * exp (-self.interest * n)
 
+    def calculate_price(self):
+        price = 0
 
-def present_discrete_value(x, r, n):
-    return x * (1 + r) ** (-n)
+        for t in range (1, self.maturity + 1):
+            price = price + self.present_value(self.principal * self.rate, t)
 
+        price = price + self.present_value(self.principal, self.maturity)
 
-def future_continuous_value(x, r, t):
-    return x * exp(r*t)
-
-
-def present_continuous_value(x, r, t):
-    return x * exp(-r*t)
-
+        return price
 
 if __name__ == '__main__':
-    # Value of investment in dollars
-    x = 100
-
-    # Defining the interest rate
-    r = 0.05
-
-    # Defining the duration (years)
-    n = 5
-
-    print ("Future value (discrete model) of x: %s" % future_discrete_value(x, r, n))
-    print ("Present value (discrete model) of x: %s" % present_discrete_value(x, r, n))
-    print ("Future value (continuous model) of x: %s" % future_continuous_value(x, r, n))
-    print ("Present value (continuous model) of x: %s" % present_continuous_value(x, r, n))
+    bond = CouponBonds(1000, 10, 2, 4)
+    print (bond.calculate_price())

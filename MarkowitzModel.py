@@ -1,24 +1,32 @@
+# Created By Shams Reza Sajid
+# --
+# --
+# This exercise demonstrates the implementation of the Markowitz Model
+
 import numpy as np
 import yfinance as yf
 import pandas as pd
+import datetime as dt
 import matplotlib.pyplot as plt
 import scipy.optimize as optimization
 
+
 # on average there are 252 trading days in a year
 NUM_TRADING_DAYS = 252
+
 # we will generate random w (different portfolios)
 NUM_PORTFOLIOS = 10000
 
 # stocks we are going to handle
-stocks = ['AAPL', 'WMT', 'TSLA', 'GE', 'AMZN', 'DB']
+stocks = ['AAPL', 'AMD', 'TSLA', 'GOOG', 'AMZN', 'MSFT']
 
 # historical data - define START and END dates
-start_date = '2010-01-01'
-end_date = '2017-01-01'
+start_date = '2012-01-01'
+end_date = dt.datetime.now()
 
 
 def download_data():
-    # name of the stock (key) - stock values (2010-1017) as the values
+    # name of the stock (key) - stock values (2012 - Present Date) as the values
     stock_data = {}
 
     for stock in stocks:
